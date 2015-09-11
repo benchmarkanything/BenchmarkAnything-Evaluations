@@ -5,7 +5,7 @@ package BenchmarkAnything::Evaluations;
 
 use Moose;
 
-=head2 transform_chartlines (\@values)
+=head2 multi_point_stats (\@values)
 
 For an array of values it gets basic statistical aggregations, like
 average, standard deviation, and confidence interval.
