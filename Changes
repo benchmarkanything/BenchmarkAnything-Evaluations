@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.002     2015-09-15
         - don't rely on Perl "say" from 5.10+
         - no OO for the time being, just provide functions
 
