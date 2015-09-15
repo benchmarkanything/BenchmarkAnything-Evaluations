@@ -3,6 +3,10 @@ use warnings;
 package BenchmarkAnything::Evaluations;
 # ABSTRACT: Evaluation support for BenchmarkAnything data
 
+use PDLA::Core;
+use PDLA::Stats;
+use PDLA::Ufunc;
+
 =head2 multi_point_stats (\@values)
 
 For an array of values it gets basic statistical aggregations, like
@@ -14,15 +18,15 @@ sub multi_point_stats
 {
         my ($values) = @_;
 
-        my $data = PDL::Core::pdl(@$values);
-        my $avg  = PDL::Stats::Basic::average($data);
+        my $data = pdl(@$values);
+        my $avg  = average($data);
         return {
-                avg         => PDL::Core::sclr($avg),
-                stdv        => PDL::Stats::Basic::stdv($data),
-                min         => PDL::Ufunc::min($data),
-                max         => PDL::Ufunc::max($data),
-                ci_95_lower => $avg - 1.96 * PDL::Stats::Basic::se($data),
-                ci_95_upper => $avg + 1.96 * PDL::Stats::Basic::se($data),
+                avg         => sclr($avg),
+                stdv        => stdv($data),
+                min         => min($data),
+                max         => max($data),
+                ci_95_lower => $avg - 1.96 * se($data),
+                ci_95_upper => $avg + 1.96 * se($data),
                };
 }
 
@@ -146,7 +150,7 @@ sub transform_chartlines
                 foreach my $x (keys %{$VALUES{$title}})
                 {
                         my $multi_point_values     = $VALUES{$title}{$x}{values};
-                        $VALUES{$title}{$x}{stats} = $self->multi_point_stats($multi_point_values);
+                        $VALUES{$title}{$x}{stats} = multi_point_stats($multi_point_values);
                 }
         }
 
