@@ -123,13 +123,13 @@ sub transform_chartlines
                 # skip typical empty results
                 if (not @$results or (@$results == 1 and not $results->[0]{NAME}))
                 {
-                        say STDERR "benchmarkanything: transform_chartlines: ignore empty chartline '$title'" if $verbose;
+                        print STDERR "benchmarkanything: transform_chartlines: ignore empty chartline '$title'\n" if $verbose;
                         next CHARTLINE;
                 }
                 push @titles, $title;
 
-                say STDERR sprintf("* %-20s - %-40s", $title, $NAME) if $verbose;
-                say STDERR "  VALUE_IDs: ".join(",", map {$_->{VALUE_ID}} @$results) if $debug;
+                print STDERR sprintf("* %-20s - %-40s\n", $title, $NAME) if $verbose;
+                print STDERR "  VALUE_IDs: ".join(",", map {$_->{VALUE_ID}} @$results)."\n" if $debug;
 
         POINT:
                 foreach my $point (@$results)
@@ -180,13 +180,13 @@ sub transform_chartlines
                         my $ok = 1;
                         foreach my $x (@all_x) {
                                 if (not @{$VALUES{$title}{$x}{values} || []}) {
-                                        say STDERR "skip: $title (missing values for $x)" if $verbose;
+                                        print STDERR "skip: $title (missing values for $x)\n" if $verbose;
                                         $ok = 0;
                                 }
                         }
                         if ($ok) {
                                 $clean_chartlines{$title} = 1;
-                                say STDERR "okay: $title" if $verbose;
+                                print STDERR "okay: $title\n" if $verbose;
                         }
                 }
         }
@@ -202,7 +202,7 @@ sub transform_chartlines
                         my $stdv  = $VALUES{$title}{$x}{stats}{stdv};
                         my $ci95l = $VALUES{$title}{$x}{stats}{ci_95_lower};
                         my $ci95u = $VALUES{$title}{$x}{stats}{ci_95_upper};
-                        say STDERR sprintf("  %-20s . %-7s . (ci95l..avg..ci95u) = (%2.2f .. %2.2f .. %2.2f) +- stdv %5.2f (%3d points)", $title, $x, $ci95l, $avg, $ci95u, $stdv, $count) if $verbose;
+                        print STDERR sprintf("  %-20s . %-7s . (ci95l..avg..ci95u) = (%2.2f .. %2.2f .. %2.2f) +- stdv %5.2f (%3d points)\n", $title, $x, $ci95l, $avg, $ci95u, $stdv, $count) if $verbose;
                 }
         }
 
