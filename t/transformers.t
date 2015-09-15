@@ -11,8 +11,6 @@ my $input;
 my $output;
 my $expected;
 
-my $analyzer = BenchmarkAnything::Evaluations->new();
-
 $input = [
           { title   => "dpath-T-n64",
             results => [
@@ -83,7 +81,7 @@ my $options =  {
                 verbose     => 1,
                };
 diag "\n"; # align all verbose output
-$output = $analyzer->transform_chartlines($input, $options);
+$output = BenchmarkAnything::Evaluations::transform_chartlines($input, $options);
 cmp_deeply($output, $expected, "data transformation - google areachart");
 
 # Finish

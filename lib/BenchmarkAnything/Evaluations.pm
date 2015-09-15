@@ -3,8 +3,6 @@ use warnings;
 package BenchmarkAnything::Evaluations;
 # ABSTRACT: Evaluation support for BenchmarkAnything data
 
-use Moose;
-
 =head2 multi_point_stats (\@values)
 
 For an array of values it gets basic statistical aggregations, like
@@ -14,11 +12,7 @@ average, standard deviation, and confidence interval.
 
 sub multi_point_stats
 {
-        my ($self, $values) = @_;
-
-        require PDL::Stats::Basic;
-        require PDL::Ufunc;
-        require PDL::Core;
+        my ($values) = @_;
 
         my $data = PDL::Core::pdl(@$values);
         my $avg  = PDL::Stats::Basic::average($data);
@@ -95,7 +89,7 @@ There are assumptions for the transformation:
 
 sub transform_chartlines
 {
-        my ($self, $chartlines, $options) = @_;
+        my ($chartlines, $options) = @_;
 
         my $x_key       = $options->{x_key};
         my $x_type      = $options->{x_type};
