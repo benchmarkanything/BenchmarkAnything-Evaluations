@@ -2,6 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
         - don't rely on Perl "say" from 5.10+
+        - no OO for the time being, just provide functions
 
 0.001     2015-09-11
         - evaluation support functions around BenchmarkAnything data
