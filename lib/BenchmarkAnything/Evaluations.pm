@@ -1,3 +1,4 @@
+use 5.010; # Perl 5.10+ needed for PDL/PDLA
 use strict;
 use warnings;
 package BenchmarkAnything::Evaluations;
