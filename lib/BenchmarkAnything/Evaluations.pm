@@ -104,6 +104,7 @@ sub transform_chartlines
         my $verbose     = $options->{verbose};
         my $debug       = $options->{debug};
         my $dropnull    = $options->{dropnull};
+        my $rawnumbers  = "";
 
         # from all chartlines collect values into buckets for the dimensions we need
         #
@@ -127,7 +128,10 @@ sub transform_chartlines
                 }
                 push @titles, $title;
 
-                print STDERR sprintf("* %-20s - %-40s\n", $title, $NAME) if $verbose;
+                my $rawline = sprintf("* %-20s - %-40s\n", $title, $NAME);
+                print STDERR $rawline if $verbose;
+                $rawnumbers.=$rawline;
+
                 print STDERR "  VALUE_IDs: ".join(",", map {$_->{VALUE_ID}} @$results)."\n" if $debug;
 
         POINT:
@@ -201,7 +205,9 @@ sub transform_chartlines
                         my $stdv  = $VALUES{$title}{$x}{stats}{stdv};
                         my $ci95l = $VALUES{$title}{$x}{stats}{ci_95_lower};
                         my $ci95u = $VALUES{$title}{$x}{stats}{ci_95_upper};
-                        print STDERR sprintf("  %-20s . %-7s . (ci95l..avg..ci95u) = (%2.2f .. %2.2f .. %2.2f) +- stdv %5.2f (%3d points)\n", $title, $x, $ci95l, $avg, $ci95u, $stdv, $count) if $verbose;
+                        my $rawline = sprintf("  %-20s . %-7s . (ci95l..avg..ci95u) = (%2.2f .. %2.2f .. %2.2f) +- stdv %5.2f (%3d points)\n", $title, $x, $ci95l, $avg, $ci95u, $stdv, $count);
+                        $rawnumbers .= $rawline;
+                        print STDERR $rawline if $verbose;
                 }
         }
 
@@ -225,7 +231,12 @@ sub transform_chartlines
                         $RESULTMATRIX[$i+1] [$j+1] = $value;
                 }
         }
-        return \@RESULTMATRIX;
+
+        if (wantarray) {
+                return (\@RESULTMATRIX, $rawnumbers);
+        } else {
+                return \@RESULTMATRIX;
+        }
 }
 
 1;

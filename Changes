@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - provide raw text (what once used to be just verbose output)
 
 0.002     2015-09-15
         - don't rely on Perl "say" from 5.10+
