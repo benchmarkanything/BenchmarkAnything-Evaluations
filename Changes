@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.003     2016-04-25
         - provide raw text (what once used to be just verbose output)
 
 0.002     2015-09-15
