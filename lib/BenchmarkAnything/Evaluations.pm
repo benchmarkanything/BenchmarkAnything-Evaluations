@@ -1,12 +1,12 @@
-use 5.010; # Perl 5.10+ needed for PDL/PDLA
+use 5.010; # Perl 5.10+ needed for PDL
 use strict;
 use warnings;
 package BenchmarkAnything::Evaluations;
 # ABSTRACT: Evaluation support for BenchmarkAnything data
 
-use PDLA::Core;
-use PDLA::Stats;
-use PDLA::Ufunc;
+use PDL::Core;
+use PDL::Stats;
+use PDL::Ufunc;
 
 =head2 multi_point_stats (\@values)
 
