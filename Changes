@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - refactoring and more result structure 2for more versatile use
 
 0.004     2021-12-01
         - switch from PDLA to PDL
